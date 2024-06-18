@@ -1,38 +1,49 @@
-# Project Base React vite TypeScript
+# Internal Requests Management - Frontend
 
-## Run Locally
+This repository contains the code for the frontend of the internal requests management application developed in React with Vite. The project is designed to track and control internal requests made in the "El Surtidor BG SAS" warehouse by employees to the purchasing office.
 
-Clone the project
+## Technologies Used
 
-```bash
-  git clone 
-  // or
-  git clone 
+- **React:** Library for building user interfaces.
+- **Vite:** Fast build tool for modern frontend projects.
+- **Redux:** Library for managing global application state.
+
+## Prerequisites
+
+Before setting up the project, ensure you have the following prerequisites installed on your system:
+
+- **Node.js:** [Download and install Node.js](https://nodejs.org/)
+- **npm:** Node Package Manager, usually included with Node.js. You can check if it is installed by running `npm -v` in your terminal.
+
+## Installation
+
+Follow these steps to set up the project in your local environment:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/wfgp12/solicitudes-surtidor-front
 ```
 
-Go to the project directory
-
-```bash
-  cd taller-3-microservicios && cd src
+2. **Go to the project directory:**
+  ```bash
+  cd solicitudes-surtidor-front
 ```
 
-Install dependencies
-
+3. **Install dependencies**
 ```bash
   npm install
   //or
   yarn install
 ```
 
-Start the server
-
+4. **Start the server**
 ```bash
   npm start
   //or
   yarn start
 ```
 
-
+<!-- 
 ## Run in Docker
 
 Clone the project
@@ -62,5 +73,5 @@ With this, you will have the project up and running, either locally or via Docke
 
 ## Tecnologias
 
-**Client:** React, Ajax, Vite
+**Client:** React, Ajax, Vite -->
 
