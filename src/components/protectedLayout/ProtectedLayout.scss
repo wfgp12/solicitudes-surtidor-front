@@ -7,7 +7,7 @@
 
     &__navBar {
         align-items: center;
-        background-color: var(--color-melrose);
+        background-color: var(--color-primary-hv);
         display: flex;
         flex-direction: row;
         height: 60px;
@@ -25,12 +25,12 @@
             margin: 0 10px;
             text-decoration: none;
             font-size: 20px;
-            color: var(--color-shuttle-gray);
+            color: var(--color-text);
             font-weight: 500;
             
             .subtitle{
                 font-size: 14px;
-                color: var(--color-link-water);
+                color: var(--color-text);
                 font-weight: 200;
             }
         }
@@ -45,7 +45,7 @@
         &__burger-container {
             padding: 5px;
             border-radius: 5px;
-            background-color: var(--color-cornflower-blue);
+            background-color: var(--color-secondary);
         }
 
         &__burger {
@@ -65,7 +65,7 @@
                 position: absolute;
                 height: 4px;
                 width: 100%;
-                background: var(--color-magnolia);
+                background: var(--color-bg);
                 border-radius: 9px;
                 opacity: 1;
                 left: 0;
@@ -126,7 +126,7 @@
         overflow: hidden;
         width: 55px;
         justify-content: space-between;
-        background-color: var(--color-magnolia);
+        background-color: var(--color-bg);
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         z-index: 1;
 
@@ -145,7 +145,7 @@
             align-items: center;
             gap: 10px;
             font-size: 18px;
-            color: var(--color-shuttle-gray);
+            color: var(--color-text);
             font-weight: 500;
             padding: 15px 15px;
             
@@ -157,21 +157,21 @@
             }
 
             &:hover {
-                background-color: var(--color-melrose-light);
+                background-color: var(--color-secondary-hv);
                 color: white;
             }
 
             &--active {
                 letter-spacing: 1.5px;
                 font-weight: bold;
-                color: var(--color-cornflower-blue);
+                color: var(--color-secondary);
             }
         }
 
         &__log-out {
             background-color: transparent;
             border-radius: 0;
-            border-top: 2px solid var(--color-shuttle-gray);
+            border-top: 2px solid var(--color-text);
         }
 
         &--open{
