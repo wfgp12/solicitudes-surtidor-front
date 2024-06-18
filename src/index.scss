@@ -24,19 +24,18 @@
   line-height: 1;
 
   // color-scheme: light dark;
-  color: var(--color-shuttle-gray);
+  color: var(--color-text);
   // background-color: #f9f9f9;
 
-  --color-royal-blue: #535BF2;
-  --color-cornflower-blue: #7775FF;
-  --color-melrose: #9991FF;
-  --color-melrose-light: #BAADFF;
-  --color-fog: #DBCBFF;
-  --color-shuttle-gray: #566573;
-  --color-gull-gray: #91A0AF;
-  --color-spun-pearl: #ADA9BB;
-  --color-link-water: #D0E0F0;
-  --color-magnolia:#FBF7FF;
+  --color-primary: #FDF000;
+  --color-primary-hv: #FFC700;
+  --color-secondary: #E1251B;
+  --color-secondary-hv: #fa3a3a;
+  --color-text: #272833;
+  --color-text-label: #7C838A;
+  --color-input-border: #cccdce;
+  --color-input-bg: #D9D9D9;
+  --color-bg:#FBF7FF;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -47,11 +46,11 @@
 
 a {
   font-weight: 500;
-  color: var(--color-cornflower-blue);
+  color: var(--color-secondary);
   text-decoration: none;
 
   &:hover {
-    color: var(--color-royal-blue);
+    color: var(--color-secondary-hv);
   }
 }
 
@@ -62,7 +61,7 @@ body {
   overflow: hidden;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--color-magnolia);
+  background-color: var(--color-bg);
 }
 
 
@@ -73,33 +72,33 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color-cornflower-blue);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.25s ease;
 
   &:hover {
-    background-color:var(--color-royal-blue);
+    background-color:var(--color-primary-hv);
   }
 
 }
 
 input {
-  background-color: var(--color-magnolia);
   border-radius: 8px;
-  color: var(--color-spun-pearl);
-  border: 2px solid var(--color-spun-pearl);
+  color: var(--color-text);
+  border: 2px solid var(--color-input-border);
+  background-color: var(--color-input-bg);
   font-family: Poppins;
   padding: 5px 5px 5px 15px;
   font-weight: 200;
-  letter-spacing: 1.3px;
-  transition: all .25s ease;
+  letter-spacing: 1.2px;
+  transition: all .3s ease;
   
   &:hover{
-    border: 2px solid var(--color-fog);
+    border: 2px solid var(--color-primary);
   }
-  &:focus-visible {
-    border: 2px solid var(--color-cornflower-blue);
+  &:focus-visible, &:not(:placeholder-shown) {
+    border: 2px solid var(--color-primary);
     outline: none;
   }
 }
