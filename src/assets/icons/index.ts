@@ -1,0 +1,6 @@
+export {default as UserIcon} from "./icon-user.svg"
+export {default as ChartIcon} from "./icon-chart.svg"
+export {default as ShieldStartIcon} from "./icon-shield-star.svg"
+export {default as BuildingsIcon} from "./icons-buildings.svg"
+export {default as EditIcon} from "./icon-edit.svg"
+export {default as TrashIcon} from "./icon-trash.svg"
