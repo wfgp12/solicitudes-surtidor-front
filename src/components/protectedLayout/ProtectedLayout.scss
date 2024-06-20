@@ -47,7 +47,6 @@
         &__burger-container {
             padding: 5px;
             border-radius: 5px;
-            background-color: var(--color-secondary);
         }
 
         &__burger {
@@ -67,7 +66,7 @@
                 position: absolute;
                 height: 4px;
                 width: 100%;
-                background: var(--color-bg);
+                background: var(--color-secondary);
                 border-radius: 9px;
                 opacity: 1;
                 left: 0;
@@ -193,7 +192,7 @@
             }
 
             &:hover {
-                background-color: var(--color-primary-hv);
+                background-color: var(--color-primary);
                 color: white;
             }
 
@@ -221,7 +220,7 @@
         &__log-out {
             background-color: transparent;
             border-radius: 0;
-            border-top: 2px solid var(--color-text);
+            border-top: 2px solid var(--color-input-border);
         }
 
         &--open {

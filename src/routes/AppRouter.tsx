@@ -3,61 +3,30 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ProtectedDashboardRoutes, ProtectedRoutes, PublicRoutes } from ".";
 // Pages
 import {
-    HomePage,
     LoginPage,
     NotFoundPage
 } from "../pages";
-// Assets - icons
-import FileTextIcon from './../assets/icons/icon-file-text.svg'
-import FolderIcon from './../assets/icons/icon-folder.svg'
-import ChartIcon from './../assets/icons/icon-chart.svg'
-import UserGroupIcon from './../assets/icons/icon-users-group.svg'
 
+// Redux - hooks
+import { useAppSelector } from "../redux/store/hooks";
+// Models
+import { MainRole } from "../models/user";
+import { getDefaultRoute, routes } from "../utils/routes-location-utils";
 
-export const routes = [
-    {
-        path: "request",
-        element: <HomePage />,
-        label: "Solicitudes", 
-        icon: FileTextIcon,
-        permissions: []
-    },
-    {
-        path: "request-management",
-        element: <NotFoundPage />, 
-        label: "Gestión de recursos",
-        icon: FolderIcon,
-        permissions: []
-    },
-    {
-        path: "reports",
-        element: <NotFoundPage />, 
-        label: "Reportes",
-        icon: ChartIcon,
-        permissions:[]
-    },
-    {
-        path: "administrator",
-        element: <NotFoundPage />, 
-        label: "Administrador",
-        icon: UserGroupIcon,
-        permissions:[]
-    },
-];
-
-const protectedRoutes = [
-    {
-        path: "",
-        element: <Navigate to="/request" />,
-    },
-    ...routes.map((route, index) => ({
-        path: route.path,
-        element: route.element,
-        key: index,
-    })),
-];
 
 export const AppRouter = () => {
+    const user = useAppSelector(state => state.auth.user);
+
+    const renderProtectedRoutes = () => routes
+        .filter(route => route.permissions.length === 0 || route.permissions.includes(user?.role as MainRole))
+        .map((route, index) => {
+            const isAuthorized = route.permissions.length === 0 || route.permissions.includes(user?.role as MainRole);
+            if (isAuthorized) {
+                return <Route key={index} path={route.path} element={route.element} />;
+            }
+            return null;
+        });
+
     return (
         <Routes>
             {/* <Route path="" element={<Navigate to="/" />} /> */}
@@ -67,9 +36,8 @@ export const AppRouter = () => {
             </Route>
             <Route path="" element={<ProtectedRoutes />}>
                 <Route path="" element={<ProtectedDashboardRoutes />}>
-                    {protectedRoutes.map((route, index) => (
-                        <Route key={index} path={route.path} element={route.element} />
-                    ))}
+                    <Route path="" element={<Navigate to={getDefaultRoute(user?.role)} />} />
+                    {renderProtectedRoutes()}
                 </Route>
             </Route>
             <Route path="/not-found" element={<NotFoundPage />} />

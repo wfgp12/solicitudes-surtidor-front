@@ -5,12 +5,13 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // Store - Hooks
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-// Assets
+// Assets - icons
 import LogOutIcon from "../../assets/icons/icon-logout.svg";
 import LogoSurtidor from "../../assets/icons/logo-surtidor.svg";
 // Styles
 import "./ProtectedLayout.scss";
-import { routes } from "../../routes";
+// Utils
+import { routes } from "../../utils/routes-location-utils";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     const [openSideBar, setOpenSideBar] = useState<boolean>(false);
@@ -25,9 +26,6 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="protected-layout">
             <nav className="protected-layout__navBar">
                 <div className="protected-layout__logo-container">
-                    <div className="protected-layout__logo-container__logo">
-                        <img src={LogoSurtidor} alt="logo" />
-                    </div>
                     <div className="protected-layout__navBar__burger-container">
                         <label className="protected-layout__navBar__burger">
                             <input
@@ -39,6 +37,9 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
                             <span></span>
                             <span></span>
                         </label>
+                    </div>
+                    <div className="protected-layout__logo-container__logo">
+                        <img src={LogoSurtidor} alt="logo" />
                     </div>
                 </div>
                 <ul className="protected-layout__navBar__menu">
@@ -57,20 +58,22 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
                     }
                 >
                     <div className="protected-layout__side-bar__menu">
-                        {routes.map((route, index) => (
-                            <NavLink
-                                key={index}
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "protected-layout__side-bar__item protected-layout__side-bar__item--active"
-                                        : "protected-layout__side-bar__item"
-                                }
-                                to={route.path}
-                            >
-                                <img src={route.icon} alt="home-icons" />
-                                <span>{route.label}</span>
-                            </NavLink>
-                        ))}
+                        {routes
+                            .filter(route => route.permissions.length === 0 || route.permissions.includes(user!.role))
+                            .map((route, index) => (
+                                <NavLink
+                                    key={index}
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "protected-layout__side-bar__item protected-layout__side-bar__item--active"
+                                            : "protected-layout__side-bar__item"
+                                    }
+                                    to={route.path}
+                                >
+                                    <img src={route.icon} alt="home-icons" />
+                                    <span>{route.label}</span>
+                                </NavLink>
+                            ))}
                     </div>
                     <div className="protected-layout__side-bar__menu">
                         <button

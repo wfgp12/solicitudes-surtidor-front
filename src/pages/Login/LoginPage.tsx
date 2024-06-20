@@ -36,7 +36,9 @@ const LoginPage = () => {
           name: "Wilhen",
           lastName: "Gutiérrez",
           email:"wfgp12@email.com",
-          numberPhone: "3059299881"
+          numberPhone: "3059299881",
+          role: 'gestionador',
+          subRole:"administracion"
         },
         token: ""
       })
