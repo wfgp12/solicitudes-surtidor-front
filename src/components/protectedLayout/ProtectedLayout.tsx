@@ -12,6 +12,7 @@ import LogoSurtidor from "../../assets/icons/logo-surtidor.svg";
 import "./ProtectedLayout.scss";
 // Utils
 import { routes } from "../../utils/routes-location-utils";
+import { LocalStorageKeys } from "../../utils/local-storage-keys";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     const [openSideBar, setOpenSideBar] = useState<boolean>(false);
@@ -19,6 +20,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
 
     const handleLogOut = () => {
+        localStorage.removeItem(LocalStorageKeys.token);
         dispatch(logoutAction());
     };
 
@@ -44,8 +46,8 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <ul className="protected-layout__navBar__menu">
                     <li className="protected-layout__navBar__user">
-                        <span>{`${user?.name} ${user?.lastName}`}</span>
-                        <span className="subtitle">{user?.email}</span>
+                        <span>{`${user?.name}`}</span>
+                        <span className="subtitle">{user?.role.name}</span>
                     </li>
                 </ul>
             </nav>
@@ -59,7 +61,11 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
                 >
                     <div className="protected-layout__side-bar__menu">
                         {routes
-                            .filter(route => route.permissions.length === 0 || route.permissions.includes(user!.role))
+                            .filter(route => {
+                                if (route.permissions.length === 0) return true;
+                                const userPermissions = user?.role.permissions.map(permission => permission.name) || [];
+                                return route.permissions.some(permission => userPermissions.includes(permission));
+                            })
                             .map((route, index) => (
                                 <NavLink
                                     key={index}

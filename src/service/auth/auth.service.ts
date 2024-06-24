@@ -1,24 +1,22 @@
-import { LoginResponse, RegisterForm, RegisterResponse, validateTokenResponse } from "../../models/auth"
-import { mapperToUserDTO } from "../../models/user";
+import { LoginResponse, RegisterForm, RegisterResponse } from "../../models/auth"
+import { UserDAO } from "../../models/user";
 import { LocalStorageKeys } from "../../utils/local-storage-keys";
 import http from "../http.service";
 
-export const loginService = async (email: string, password: string) => {
+export const loginService = async (document: string, password: string) => {
     try {
-        const { status, data, error } = await http.post<LoginResponse>('api/user/login', { email, password });
+        const { status, data, error } = await http.post<LoginResponse>('api/users/login', { document, password });
         if (status === 'error' || !data) throw new Error(error?.message as string);
 
         const {user, token} = data;
-        const userModel = mapperToUserDTO(user);
-
         localStorage.setItem(LocalStorageKeys.token, token);
 
         return {
-            user: userModel,
+            user,
             token
         }
     } catch (error) {
-        console.error(error);
+        throw new Error((error as Error).message);
     }
 }
 
@@ -36,15 +34,12 @@ export const registerService = async (newUser: RegisterForm) => {
 
 export const validateTokenSession = async () => {
     try {
-        const { status, data, error } = await http.post<validateTokenResponse>('api/user/validate-token');
+        const { status, data, error } = await http.post<UserDAO>('api/users/validate-session');
         if (status === 'error' || !data) throw new Error(error?.message as string);
 
-        const {user} = data;
-        const userModel = mapperToUserDTO(user);
-
-        return userModel;
+        return data;
         
     } catch (error) {
-        console.error(error);
+        throw new Error((error as Error).message)
     }
 }

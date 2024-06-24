@@ -7,15 +7,16 @@ import UserGroupIcon from './../assets/icons/icon-users-group.svg'
 import { IRoute } from '../models/routes';
 import {
     AdministratorPage,
-    HomePage,
-    NotFoundPage
+    // HomePage,
+    NotFoundPage,
+    RequestsPage
 } from "../pages";
-import { MainRole } from '../models/user';
+import { PermissionDAO, PermissionType } from '../models/user';
 
 export const routes: IRoute[] = [
     {
         path: "request",
-        element: <HomePage />,
+        element: <RequestsPage />,
         label: "Solicitudes",
         icon: FileTextIcon,
         permissions: ["administrador", "solicitantes", "monitor"]
@@ -43,16 +44,23 @@ export const routes: IRoute[] = [
     },
 ];
 
-export const getDefaultRoute = (role?: MainRole) => {
-    switch (role) {
-        case 'gestionador':
-            return '/request-management';
-        case 'monitor':
-            return '/reports';
-        case 'administrador':
-            return '/administrator';
-        case 'solicitantes':
-        default:
-            return '/request';
+const permissionRoutes: Record<PermissionType, string> = {
+    'administrador': '/administrator',
+    'monitor': '/reports',
+    'gestionador': '/request-management',
+    'solicitantes': '/request',
+};
+
+// Definir el orden de prioridad
+const permissionPriority: PermissionType[] = ['administrador', 'monitor', 'gestionador', 'solicitantes'];
+
+export const getDefaultRoute = (permissions?:PermissionDAO[]) => {
+    if (permissions) {
+        for (const permission of permissionPriority) {
+            if (permissions.some(p => p.name === permission)) {
+                return permissionRoutes[permission];
+            }
+        }
     }
+    return '/request';
 };

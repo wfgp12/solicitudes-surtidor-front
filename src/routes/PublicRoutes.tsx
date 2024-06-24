@@ -4,11 +4,11 @@ import { PublicLayout } from "../components";
 import { getDefaultRoute } from "../utils/routes-location-utils";
 
 export const PublicRoutes = () => {
-    const auth = useAppSelector(state => state.auth)
+    const {isAuth, user} = useAppSelector(state => state.auth)
     const location = useLocation();
 
-    return (auth.isAuth)
-        ? <Navigate to={getDefaultRoute(auth.user?.role)} state={{ from: location }} replace />
+    return (isAuth)
+        ? <Navigate to={getDefaultRoute(user!.role.permissions)} state={{ from: location }} replace />
         : <PublicLayout>
             <Outlet />
         </PublicLayout>

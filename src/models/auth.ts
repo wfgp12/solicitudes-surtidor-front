@@ -10,9 +10,6 @@ export interface LoginForm {
     password: string
 }
 
-export interface validateTokenResponse {
-    user: UserDAO
-}
 
 export interface RegisterForm extends Omit<UserDAO, 'id'> {
     password: string

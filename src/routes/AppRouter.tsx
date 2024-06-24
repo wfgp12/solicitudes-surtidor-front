@@ -10,33 +10,33 @@ import {
 // Redux - hooks
 import { useAppSelector } from "../redux/store/hooks";
 // Models
-import { MainRole } from "../models/user";
 import { getDefaultRoute, routes } from "../utils/routes-location-utils";
 
 
 export const AppRouter = () => {
     const user = useAppSelector(state => state.auth.user);
 
-    const renderProtectedRoutes = () => routes
-        .filter(route => route.permissions.length === 0 || route.permissions.includes(user?.role as MainRole))
-        .map((route, index) => {
-            const isAuthorized = route.permissions.length === 0 || route.permissions.includes(user?.role as MainRole);
-            if (isAuthorized) {
-                return <Route key={index} path={route.path} element={route.element} />;
-            }
-            return null;
-        });
+    const renderProtectedRoutes = () => {
+        return routes
+            .filter(route => {
+                if (route.permissions.length === 0) return true;
+                const userPermissions = user?.role.permissions.map(permission => permission.name) || [];
+                return route.permissions.some(permission => userPermissions.includes(permission));
+            })
+            .map((route) => {
+                return <Route key={route.label} path={route.path} element={route.element} />;
+            });
+    }
 
     return (
         <Routes>
-            {/* <Route path="" element={<Navigate to="/" />} /> */}
             <Route path="" element={<PublicRoutes />}>
                 <Route path="" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<LoginPage />} />
             </Route>
             <Route path="" element={<ProtectedRoutes />}>
                 <Route path="" element={<ProtectedDashboardRoutes />}>
-                    <Route path="" element={<Navigate to={getDefaultRoute(user?.role)} />} />
+                    <Route path="" element={<Navigate to={getDefaultRoute(user?.role.permissions)} />} />
                     {renderProtectedRoutes()}
                 </Route>
             </Route>

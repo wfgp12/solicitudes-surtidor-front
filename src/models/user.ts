@@ -1,31 +1,17 @@
-export function mapperToUserDTO(userDAO: UserDAO):UserDTO {
-    return {
-        id: userDAO.id,
-        name: userDAO.name,
-        lastName: userDAO.lastName,
-        email: userDAO.email,
-        numberPhone: userDAO.phoneNumber,
-        role: userDAO.role,
-        subRole: userDAO.subRole
-    }
+export interface UserDAO {
+    id: number;
+    name: string;
+    document: string;
+    email: string;
+    role: RoleDAO;
+}
+export interface UserCreate extends Omit<UserDAO, 'id' | 'role'> {
+    id_role: number;
+    password: string,
+    confirmPassword: string
 }
 
-export function mapperToUserDAO(userDTO: UserDTO):UserDAO {
-    return {
-        id: userDTO.id,
-        name: userDTO.name,
-        lastName: userDTO.lastName,
-        email: userDTO.email,
-        phoneNumber: userDTO.numberPhone,
-        role: userDTO.role,
-        subRole: userDTO.subRole
-    }
-}
-
-export type MainRole = 'solicitantes' | 'monitor' | 'gestionador' | "administrador";
-
-export type SubRole = 
-    | 'asesora_comercial'
+export type RoleType = 'asesora_comercial'
     | 'lider_de_seccion'
     | 'impulsadora'
     | 'supervisor'
@@ -35,22 +21,24 @@ export type SubRole =
     | 'coordinador_de_bodega'
     | 'coordinador_de_compras';
 
-export interface UserDTO {
-    id:          number;
-    name:        string;
-    lastName:    string;
-    email:       string;
-    numberPhone: string;
-    role:        MainRole;
-    subRole:     SubRole;
+export interface RoleDAO {
+    id: number;
+    name: RoleType;
+    permissions: PermissionDAO[];
 }
 
-export interface UserDAO {
-    id:          number;
-    name:        string;
-    lastName:    string;
-    email:       string;
-    phoneNumber: string;
-    role:        MainRole;
-    subRole:     SubRole;
+export interface RoleCreate {
+    name: string,
+    permissions: number[]
 }
+
+export type RoleSelector = Omit<RoleDAO, 'permissions'>
+
+export type PermissionType = 'solicitantes' | 'monitor' | 'gestionador' | 'administrador';
+
+export interface PermissionDAO {
+    id: number;
+    name: PermissionType
+}
+
+

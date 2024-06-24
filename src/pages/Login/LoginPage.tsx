@@ -12,38 +12,37 @@ import { useAppDispatch } from "../../redux/store/hooks";
 
 // Styles
 import "./LoginPage.scss";
-// import { loginService } from "../../service/auth/auth.service";
+
+// Services
+import { loginService } from "../../service/auth/auth.service";
+
+// Hooks
 import { useForm } from "../../hooks/useForm";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
 
-  const {values, handleChange} = useForm<LoginForm>({
+  const { values, handleChange } = useForm<LoginForm>({
     document: "",
     password: ""
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const response = await loginService(values.email, values.password);
-    // if (!response) return;
-
-    // const { user, token } = response;
-    dispatch(
-      loginAction({
-        user : {
-          id: 12,
-          name: "Wilhen",
-          lastName: "Gutiérrez",
-          email:"wfgp12@email.com",
-          numberPhone: "3059299881",
-          role: 'administrador',
-          subRole:"administracion"
-        },
-        token: ""
-      })
-    );
-    return;
+    try {
+      const response = await loginService(values.document, values.password);
+      if (!response) return;
+      const { user, token } = response;
+      dispatch(
+        loginAction({
+          user,
+          token
+        })
+      );
+      return;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -7,7 +7,7 @@ import { validateTokenSession } from "./service/auth/auth.service";
 import { LocalStorageKeys } from "./utils/local-storage-keys";
 
 import "./App.scss";
-import { loginAction } from "./redux/slices/authSlice";
+import { loginAction, logoutAction } from "./redux/slices/authSlice";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -15,15 +15,20 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem(LocalStorageKeys.token);
+
     if (token) {
       validateTokenSession()
         .then((resp) => {
-          if(!resp) return;
-          dispatch(loginAction({user: resp, token }));
+          dispatch(loginAction({ user: resp, token }));
         })
-        .catch((error) => console.error(error))
+        .catch((error) => {
+          console.error(error)
+
+          localStorage.removeItem(LocalStorageKeys.token);
+          dispatch(logoutAction());
+        })
         .finally(() => setLoading(false))
-    }else{
+    } else {
       setLoading(false);
     }
   }, [dispatch]);
