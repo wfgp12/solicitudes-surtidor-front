@@ -3,8 +3,8 @@ import { useAppSelector } from "../redux/store/hooks";
 import { ProtectedLayout } from "../components";
 
 export const ProtectedRoutes = () => {
-    let auth = useAppSelector(state => state.auth)
-    let location = useLocation();
+    const auth = useAppSelector(state => state.auth)
+    const location = useLocation();
 
     return (!auth.isAuth)
         ? <Navigate to="/login" state={{ from: location }} replace />

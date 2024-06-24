@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { UserDTO } from "../../models/user"
+import { UserDAO } from "../../models/user"
 
 
 interface AppSliceState {
-    user: UserDTO | null
+    user: UserDAO | null
     isAuth: boolean
     token?: string
 }

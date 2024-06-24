@@ -1,0 +1,66 @@
+.create-site-modal {
+    width: 600px !important;
+
+    &__sections {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &__header {
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+
+            span {
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            button {
+                padding: 5px 10px;
+            }
+        }
+
+        &__content {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            &__field {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                // width: calc(50% - 15px );
+
+                label {
+                    font-size: 15px;
+                    font-weight: 800;
+                    color: var(--color-text);
+                }
+            }
+
+            button {
+                padding: 0;
+                background: transparent;
+                display: grid;
+                place-items: center;
+                
+                &:hover {
+                    background: transparent;
+
+                    img {
+                        transform: scale(1.2);
+                    }
+                }
+
+                img {
+                    width: 28px;
+                    padding: 0;
+                    transition: all .2s;
+                }
+            }
+        }
+
+
+
+    }
+}

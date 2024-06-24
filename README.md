@@ -23,24 +23,23 @@ Follow these steps to set up the project in your local environment:
    ```bash
    git clone https://github.com/wfgp12/solicitudes-surtidor-front
 ```
-
 2. **Go to the project directory:**
-  ```bash
-  cd solicitudes-surtidor-front
+   ```bash
+   cd solicitudes-surtidor-front
 ```
 
 3. **Install dependencies**
 ```bash
-  npm install
-  //or
-  yarn install
+   npm install
+   //or
+   yarn install
 ```
 
 4. **Start the server**
 ```bash
-  npm start
-  //or
-  yarn start
+   npm start
+   //or
+   yarn start
 ```
 
 <!-- 

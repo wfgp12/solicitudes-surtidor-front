@@ -1,7 +1,7 @@
 
 import { ChangeEvent, useState } from "react";
 type FormValues<T> = {
-    [K in keyof T]: string;
+    [K in keyof T]: T[K];
 };
 
 interface FormFunctions<T> {
@@ -16,7 +16,7 @@ export const useForm = <T extends {}>(initialState: T): FormFunctions<T> => {
     const [state, setState] = useState<FormValues<T>>(() => {
         const defaultState: FormValues<T> = {} as FormValues<T>;
         for (const key in initialState) {
-            defaultState[key] = '';
+            defaultState[key] = initialState[key];
         }
         return defaultState;
     });
@@ -51,7 +51,7 @@ export const useForm = <T extends {}>(initialState: T): FormFunctions<T> => {
         setState(() => {
             const resetState: FormValues<T> = {} as FormValues<T>;
             for (const key in initialState) {
-                resetState[key] = '';
+                resetState[key] = initialState[key as keyof T];
             }
             return resetState;
         });

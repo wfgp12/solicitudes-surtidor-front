@@ -1,0 +1,17 @@
+.edit-request-modal{
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 10px;
+
+    &__field{
+        padding: 0 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        label{
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+    }
+}

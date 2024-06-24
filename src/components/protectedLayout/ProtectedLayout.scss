@@ -7,15 +7,17 @@
 
     &__navBar {
         align-items: center;
-        background-color: var(--color-primary-hv);
+        background-color: var(--color-primary);
         display: flex;
         flex-direction: row;
-        height: 60px;
+        height: 50px;
         justify-content: space-between;
         padding: 0 10px;
         position: fixed;
         top: 0;
         width: calc(100% - 20px);
+        z-index: 1;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
         z-index: 1;
 
         &__user {
@@ -27,8 +29,8 @@
             font-size: 20px;
             color: var(--color-text);
             font-weight: 500;
-            
-            .subtitle{
+
+            .subtitle {
                 font-size: 14px;
                 color: var(--color-text);
                 font-weight: 200;
@@ -45,7 +47,6 @@
         &__burger-container {
             padding: 5px;
             border-radius: 5px;
-            background-color: var(--color-secondary);
         }
 
         &__burger {
@@ -65,7 +66,7 @@
                 position: absolute;
                 height: 4px;
                 width: 100%;
-                background: var(--color-bg);
+                background: var(--color-secondary);
                 border-radius: 9px;
                 opacity: 1;
                 left: 0;
@@ -112,30 +113,59 @@
 
     }
 
+    &__logo-container {
+        display: flex;
+        align-items: center;
+        width: 250px;
+        height: 100%;
+
+        &__logo {
+            img {
+                width: 150px;
+            }
+        }
+
+    }
+
     &__container {
         display: flex;
-        margin-top: 60px;
+        margin-top: 50px;
         flex: 1;
         flex-direction: row;
         overflow: hidden;
     }
 
     &__side-bar {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        width: 55px;
-        justify-content: space-between;
+        padding-top: 10px;
         background-color: var(--color-bg);
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        transition: width .2s ease;
+        width: 55px;
         z-index: 1;
 
-        transition: width .2s ease;
-    
         &__menu {
             display: flex;
+            flex-direction: column;
             padding: 0;
             width: 250px;
+        }
+
+        &__sub-menu {
+            display: grid;
+            grid-template-rows: 40px;
+            position: relative;
+            overflow: hidden;
+            height: 0px;
+            transition: 0.5s;
+
+            &--open {
+                @extend .protected-layout__side-bar__sub-menu;
+                height: 120px;
+            }
         }
 
         &__item {
@@ -143,48 +173,63 @@
             flex: 1;
             flex-direction: row;
             align-items: center;
-            gap: 10px;
-            font-size: 18px;
+            gap: 15px;
+            font-size: 15px;
             color: var(--color-text);
-            font-weight: 500;
-            padding: 15px 15px;
-            
+            padding: 5px 17px;
             transition: all .2s ease;
 
             img {
-                width: 30px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
+            }
+
+            button {
+                padding: 0px;
+                display: grid;
+                place-items: center;
+                background-color: transparent;
             }
 
             &:hover {
-                background-color: var(--color-secondary-hv);
+                background-color: var(--color-primary);
                 color: white;
             }
 
             &--active {
-                letter-spacing: 1.5px;
-                font-weight: bold;
-                color: var(--color-secondary);
+                background: var(--color-input-border);
+
+                color: white;
+                transition: all .2s ease;
+
+                &:hover {
+                    background: var(--color-primary);
+                }
+            }
+
+            &__arrow {
+                transition: .5s ease;
+
+                &--open {
+                    transform: rotate(180deg);
+                    transition: .5s ease;
+                }
             }
         }
 
         &__log-out {
             background-color: transparent;
             border-radius: 0;
-            border-top: 2px solid var(--color-text);
+            border-top: 2px solid var(--color-input-border);
         }
 
-        &--open{
-            width: 250px;
+        &--open {
+            width: 310px;
         }
     }
 
     &__content {
-        display: flex;
         width: 100%;
-        flex: 1;
-        background-color: white;
-        justify-content: center;
-        align-items: center;
+        height: 100%;
     }
 }
