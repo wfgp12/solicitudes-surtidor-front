@@ -9,6 +9,7 @@ import {
     AdministratorPage,
     // HomePage,
     NotFoundPage,
+    RequestManagementPage,
     RequestsPage
 } from "../pages";
 import { PermissionDAO, PermissionType } from '../models/user';
@@ -23,7 +24,7 @@ export const routes: IRoute[] = [
     },
     {
         path: "request-management",
-        element: <NotFoundPage />,
+        element: <RequestManagementPage />,
         label: "Gestión de solicitudes",
         icon: FolderIcon,
         permissions: ["monitor", "gestionador", "administrador"]

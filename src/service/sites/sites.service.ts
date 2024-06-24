@@ -24,6 +24,17 @@ export const getListSitesService = async () => {
     }
 }
 
+export const deleteSiteService = async (siteId: number) => {
+    try {
+        const { status, data, error } = await http.delete('api/sites', siteId);
+        if (status === 'error' || !data) throw new Error(error?.message as string);
+
+        return true;
+    } catch (error) {
+        throw new Error((error as Error).message);
+    }
+}
+
 //section service
 export const createServiceService = async (newSection: SiteCreate, idSite: number) => {
     try {
