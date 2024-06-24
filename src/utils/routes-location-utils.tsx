@@ -20,7 +20,7 @@ export const routes: IRoute[] = [
         element: <RequestsPage />,
         label: "Solicitudes",
         icon: FileTextIcon,
-        permissions: ["administrador", "solicitantes", "monitor"]
+        permissions: ["administrador", "solicitante", "monitor"]
     },
     {
         path: "request-management",
@@ -49,11 +49,11 @@ const permissionRoutes: Record<PermissionType, string> = {
     'administrador': '/administrator',
     'monitor': '/reports',
     'gestionador': '/request-management',
-    'solicitantes': '/request',
+    'solicitante': '/request',
 };
 
 // Definir el orden de prioridad
-const permissionPriority: PermissionType[] = ['administrador', 'monitor', 'gestionador', 'solicitantes'];
+const permissionPriority: PermissionType[] = ['administrador', 'monitor', 'gestionador', 'solicitante'];
 
 export const getDefaultRoute = (permissions?:PermissionDAO[]) => {
     if (permissions) {

@@ -70,7 +70,7 @@ export const CreateUserModal = ({ isShowModal, onClose, userId }: CreateUserModa
     return (
         <Modal open={isShowModal} title={userId ? 'Editar usuario' : 'Crear nuevo usuario'} onOk={handelOk} onCancel={handelCancel}>
             <div className="edit-request-modal">
-                {Object.keys(values).map((value) => (value === "password" || value == "confirmPassword")
+                {Object.keys(values).map((value) => userId && (value === "password" || value == "confirmPassword")
                     ? null
                     : (
                         <div key={value} className="edit-request-modal__field">
