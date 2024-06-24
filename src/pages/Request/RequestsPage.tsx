@@ -77,7 +77,7 @@ export const RequestsPage = () => {
         </div>
       </div>
       <div className="requests-page__list">
-        <Table columns={requestColumns} dataSource={[{}]} />
+        <Table columns={requestColumns} dataSource={[]} />
       </div>
       <EditRequestsModal
         isShowModal={isShowModal}

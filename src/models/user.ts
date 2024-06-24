@@ -34,7 +34,7 @@ export interface RoleCreate {
 
 export type RoleSelector = Omit<RoleDAO, 'permissions'>
 
-export type PermissionType = 'solicitantes' | 'monitor' | 'gestionador' | 'administrador';
+export type PermissionType = 'solicitante' | 'monitor' | 'gestionador' | 'administrador';
 
 export interface PermissionDAO {
     id: number;

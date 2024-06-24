@@ -65,7 +65,7 @@ export const AdministratorPage = () => {
     },
     {
       title: '',
-      width: '80px',
+      width: '95px',
       render: (record) => <div className='administrator-page__btn-container'>
         <button
           onClick={() => {
@@ -102,7 +102,7 @@ export const AdministratorPage = () => {
     },
     {
       title: '',
-      width: '80px',
+      width: '95px',
       render: (record) => <div className='administrator-page__btn-container'>
         <button className='administrator-page__btn--edit'><img src={EditIcon} alt="edit-icon" /></button>
         <button
@@ -157,7 +157,7 @@ export const AdministratorPage = () => {
     },
     {
       title: '',
-      width: '80px',
+      width: '95px',
       render: (record) => <div className='administrator-page__btn-container'>
         <button className='administrator-page__btn--edit'><img src={EditIcon} alt="edit-icon" /></button>
         <button
@@ -225,7 +225,10 @@ export const AdministratorPage = () => {
           </div>
         </div>
         <div className="administrator-page__users__table">
-          <Table columns={UserColumns} dataSource={users} />
+          <Table
+            columns={UserColumns}
+            dataSource={users}
+          />
           <Modal
             title="Esta seguro de eliminar este usuario"
             open={modalState.showModalDeleteUser}
@@ -247,6 +250,7 @@ export const AdministratorPage = () => {
           </div>
           <div className="administrator-page__others__sites__table">
             <Table
+              // scroll={{ y: 300, x: ''}}
               columns={SitesColumns}
               dataSource={sites}
               rowKey="id"
@@ -284,6 +288,7 @@ export const AdministratorPage = () => {
             <Table
               columns={RolesColumns}
               dataSource={roles}
+              // scroll={{ y: 300 }}
               rowKey="id"
               expandable={{
                 expandedRowRender: (record) => (
@@ -311,19 +316,22 @@ export const AdministratorPage = () => {
         isShowModal={modalState.showUserCreateModal}
         onClose={() => {
           refreshUsers()
+          setIdsState((ps) => ({ ...ps, user: undefined }))
           setModalState((ps) => ({ ...ps, showUserCreateModal: false }))
         }} />
       <CreateSiteModal
         isShowModal={modalState.showSiteCreateModal}
         onClose={() => {
           refreshSites()
+          setIdsState((ps) => ({ ...ps, user: undefined }))
           setModalState((ps) => ({ ...ps, showSiteCreateModal: false }))
         }}
-      />
+        />
       <CreateRoleModal
         isShowModal={modalState.showRoleCreateModal}
         onClose={() => {
           refreshRoles()
+          setIdsState((ps) => ({ ...ps, user: undefined }))
           setModalState((ps) => ({ ...ps, showRoleCreateModal: false }))
         }}
       />
