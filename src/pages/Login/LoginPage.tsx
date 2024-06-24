@@ -1,25 +1,19 @@
 // Actions
 import { loginAction } from "../../redux/slices/authSlice";
-
 // Libraries
 import React from "react";
-
 // Models
 import { LoginForm } from "../../models/auth";
-
 // Store - hooks
 import { useAppDispatch } from "../../redux/store/hooks";
-
 // Styles
 import "./LoginPage.scss";
-
 // Services
 import { loginService } from "../../service/auth/auth.service";
-
 // Hooks
 import { useForm } from "../../hooks/useForm";
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const { values, handleChange } = useForm<LoginForm>({
@@ -83,5 +77,3 @@ const LoginPage = () => {
     </div>
   );
 };
-
-export default LoginPage;

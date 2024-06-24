@@ -39,9 +39,9 @@ const get = async<T>(route: string, queryParams?: Record<string, unknown>) => {
     }
 }
 
-const put = async<T>(route: string, id: string, data?: Record<string, unknown>) => {
+const put = async<T>(route: string, id: string | number, data?: Record<string, unknown>) => {
     try {
-        const url = `${route}?id=${id}`;
+        const url = `${route}/${id}`;
         return await HttpRequest<T>('put', url, data);
     } catch (error) {
         return {
@@ -55,9 +55,9 @@ const put = async<T>(route: string, id: string, data?: Record<string, unknown>) 
     }
 };
 
-const destroy = async<T>(route: string, id: string) => {
+const destroy = async<T>(route: string, id: number) => {
     try {
-        const url = `${route}?id=${id}`;
+        const url = `${route}/${id}`;
         return await HttpRequest<T>('delete', url);
     } catch (error) {
         return {

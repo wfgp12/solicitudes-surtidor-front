@@ -8,58 +8,29 @@ import './RequestStyles.scss';
 // Components
 import ProtectedComponent from '../../components/ProtectedComponent/ProtectedComponent';
 import EditRequestsModal from './components/EditRequestsModal/EditRequestsModal';
+import { getTableColumnsService } from '../../service/table-config/table-config.service';
 
-const RequestsPage = () => {
+export const RequestsPage = () => {
+  const [refreshIndex, setRefreshIndex] = useState(0)
   useEffect(() => {
-    setRequestColumns([
-      {
-        title: 'Fecha de solicitud',
-        dataIndex: 'createDate',
-        key: 'createDate'
-      },
-      {
-        title: 'Tipo de solicitud',
-        dataIndex: 'type',
-        key: 'type'
-      },
-      {
-        title: 'Referencia',
-        dataIndex: 'reference',
-        key: 'reference'
-      },
-      {
-        title: 'Archivo Adjunto',
-        dataIndex: 'file',
-        key: 'file'
-      },
-      {
-        title: 'Estado',
-        dataIndex: 'state',
-        key: 'state'
-      },
-      {
-        title: 'Revisado por',
-        dataIndex: 'reviewer',
-        key: 'reviewer'
-      },
-      {
-        title: 'Fecha de respuesta',
-        dataIndex: 'responseDate',
-        key: 'responseDate'
-      },
-      {
-        title: '',
-        render: () => (
-          <div className='requests-page__list__actions'>
-            <button className='requests-page__list__actions__btn'>
-              <img src={DotsIcon} alt="icon-dots" />
-            </button>
-          </div>
-        ),
-        key: 'createDate'
-      }
-    ])
-
+    getTableColumnsService('solicitudes')
+      .then((resp) => {
+        console.log(resp)
+        setRequestColumns([
+          ...resp,
+          {
+            title: '',
+            render: () => (
+              <div className='requests-page__list__actions'>
+                <button className='requests-page__list__actions__btn'>
+                  <img src={DotsIcon} alt="icon-dots" />
+                </button>
+              </div>
+            ),
+            key: 'createDate'
+          }
+        ])
+      })
     return () => {
       setRequestColumns([{
         title: '',
@@ -73,7 +44,7 @@ const RequestsPage = () => {
         key: 'createDate'
       }])
     }
-  }, [])
+  }, [refreshIndex])
 
   const [isShowModal, setIsShowModal] = useState(false)
   const [requestColumns, setRequestColumns] = useState<TableProps['columns']>([{
@@ -108,9 +79,12 @@ const RequestsPage = () => {
       <div className="requests-page__list">
         <Table columns={requestColumns} dataSource={[{}]} />
       </div>
-      <EditRequestsModal isShowModal={isShowModal} onClose={() => setIsShowModal(false)}/>
+      <EditRequestsModal
+        isShowModal={isShowModal}
+        onClose={() => {
+          setRefreshIndex((ps) => ps+1)
+          setIsShowModal(false)
+        }} />
     </div>
   )
 }
-
-export default RequestsPage

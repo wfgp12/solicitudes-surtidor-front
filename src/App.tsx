@@ -8,10 +8,12 @@ import { LocalStorageKeys } from "./utils/local-storage-keys";
 
 import "./App.scss";
 import { loginAction, logoutAction } from "./redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem(LocalStorageKeys.token);
@@ -26,6 +28,7 @@ function App() {
 
           localStorage.removeItem(LocalStorageKeys.token);
           dispatch(logoutAction());
+          navigate('/login')
         })
         .finally(() => setLoading(false))
     } else {

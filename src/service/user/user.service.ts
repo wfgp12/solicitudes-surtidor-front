@@ -14,12 +14,45 @@ export const getListUserService = async () => {
     }
 }
 
+export const getUserService = async (userId: number) => {
+    try {
+        const { status, data, error } = await http.get<UserDAO>(`api/users/${userId}`);
+        if (status === 'error' || !data) throw new Error(error?.message as string);
+
+        return data;
+    } catch (error) {
+        throw new Error((error as Error).message);
+    }
+}
+
 export const createUserService = async (newUser: UserCreate) => {
     try {
         const { status, data, error } = await http.post<UserDAO>('api/users', { ...newUser });
         if (status === 'error' || !data) throw new Error(error?.message as string);
 
         return data;
+    } catch (error) {
+        throw new Error((error as Error).message);
+    }
+}
+
+export const updateUserService = async (userId: number, updateUser: UserCreate) => {
+    try {
+        const { status, data, error } = await http.put<UserDAO>('api/users', userId, { ...updateUser });
+        if (status === 'error' || !data) throw new Error(error?.message as string);
+
+        return data;
+    } catch (error) {
+        throw new Error((error as Error).message);
+    }
+}
+
+export const deleteUserService = async (userId: number) => {
+    try {
+        const { status, data, error } = await http.delete('api/users', userId);
+        if (status === 'error' || !data) throw new Error(error?.message as string);
+
+        return true;
     } catch (error) {
         throw new Error((error as Error).message);
     }
@@ -50,10 +83,21 @@ export const getRoleSelectorService = async () => {
 
 export const createRoleService = async (newRole: RoleCreate) => {
     try {
-        const { status, data, error } = await http.post<PermissionDAO>('api/roles', {...newRole});
+        const { status, data, error } = await http.post<PermissionDAO>('api/roles', { ...newRole });
         if (status === 'error' || !data) throw new Error(error?.message as string);
 
         return data;
+    } catch (error) {
+        throw new Error((error as Error).message);
+    }
+}
+
+export const deleteRoleService = async (roleId: number) => {
+    try {
+        const { status, data, error } = await http.delete('api/roles', roleId);
+        if (status === 'error' || !data) throw new Error(error?.message as string);
+
+        return true;
     } catch (error) {
         throw new Error((error as Error).message);
     }
