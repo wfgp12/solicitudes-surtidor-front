@@ -46,7 +46,7 @@ export const LoginPage = () => {
       </div>
       <form id="loginForm" className="LoginPage__form" onSubmit={handleSubmit}>
         <div className="LoginPage__form__field">
-          <label className="LoginPage__form__label">email :</label>
+          <label className="LoginPage__form__label">Documento :</label>
           <input
             type="number"
             name="document"

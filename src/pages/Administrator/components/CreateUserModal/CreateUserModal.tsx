@@ -13,7 +13,7 @@ interface CreateUserModalProps {
 export const CreateUserModal = ({ isShowModal, onClose, userId }: CreateUserModalProps) => {
     const [roleSelector, setRoleSelector] = useState<RoleSelector[]>([])
     const { values, handleChange, setValue, setValues, resetForm } = useForm<UserCreate>({
-        id_role: 0,
+        id_role: null,
         name: '',
         document: '',
         email: '',
@@ -82,7 +82,12 @@ export const CreateUserModal = ({ isShowModal, onClose, userId }: CreateUserModa
                                     onChange={(value) => { console.log(value); setValue('id_role', value) }}
                                     options={roleSelector.map(({ id, name }: RoleSelector) => ({ value: id, label: name }))}
                                 />
-                                : <input type={value === "password" || value === "confirmPassword" ? "password" : "text"} name={value} value={values[value as keyof UserCreate]} onChange={handleChange} />
+                                : <input
+                                    type={value === "password" || value === "confirmPassword" ? "password" : "text"}
+                                    name={value}
+                                    value={values[value as keyof UserCreate] as number}
+                                    onChange={handleChange}
+                                />
                             }
                         </div>
                     ))

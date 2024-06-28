@@ -145,6 +145,7 @@
         overflow: hidden;
         transition: width .2s ease;
         width: 55px;
+        min-width: 55px;
         z-index: 1;
 
         &__menu {
@@ -152,20 +153,6 @@
             flex-direction: column;
             padding: 0;
             width: 250px;
-        }
-
-        &__sub-menu {
-            display: grid;
-            grid-template-rows: 40px;
-            position: relative;
-            overflow: hidden;
-            height: 0px;
-            transition: 0.5s;
-
-            &--open {
-                @extend .protected-layout__side-bar__sub-menu;
-                height: 120px;
-            }
         }
 
         &__item {
@@ -224,12 +211,14 @@
         }
 
         &--open {
-            width: 310px;
+            width: 250px;
+            min-width: 250px;
         }
     }
 
     &__content {
-        width: 100%;
+        flex-grow: 1;
         height: 100%;
+        overflow: auto;
     }
 }
