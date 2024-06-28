@@ -1,5 +1,5 @@
 
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 type FormValues<T> = {
     [K in keyof T]: T[K];
 };
@@ -12,7 +12,7 @@ interface FormFunctions<T> {
     resetForm: () => void;
 }
 
-export const useForm = <T extends {}>(initialState: T): FormFunctions<T> => {
+export const useForm = <T extends object>(initialState: T): FormFunctions<T> => {
     const [state, setState] = useState<FormValues<T>>(() => {
         const defaultState: FormValues<T> = {} as FormValues<T>;
         for (const key in initialState) {
@@ -51,7 +51,7 @@ export const useForm = <T extends {}>(initialState: T): FormFunctions<T> => {
         setState(() => {
             const resetState: FormValues<T> = {} as FormValues<T>;
             for (const key in initialState) {
-                resetState[key] = initialState[key as keyof T];
+                resetState[key as keyof T] = initialState[key as keyof T];
             }
             return resetState;
         });

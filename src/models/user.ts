@@ -6,7 +6,7 @@ export interface UserDAO {
     role: RoleDAO;
 }
 export interface UserCreate extends Omit<UserDAO, 'id' | 'role'> {
-    id_role: number;
+    id_role: number | null;
     password: string,
     confirmPassword: string
 }

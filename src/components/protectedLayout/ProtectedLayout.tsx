@@ -13,6 +13,7 @@ import "./ProtectedLayout.scss";
 // Utils
 import { routes } from "../../utils/routes-location-utils";
 import { LocalStorageKeys } from "../../utils/local-storage-keys";
+import { ConfigProvider } from "antd";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     const [openSideBar, setOpenSideBar] = useState<boolean>(false);
@@ -91,7 +92,36 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
                         </button>
                     </div>
                 </div>
-                <div className="protected-layout__content">{children}</div>
+                <div className="protected-layout__content">
+                    <ConfigProvider
+                        theme={{
+                            token: {
+                                fontFamily: 'Poppins, sans-serif',
+                                fontWeightStrong: 200,
+                            },
+                            components: {
+                                Select: {
+                                    "colorBgContainer": "rgb(217, 217, 217)",
+                                    "colorBorder": "rgb(204, 205, 206)",
+                                    "borderRadius": 8,
+                                    "colorPrimary": "FDF000",
+                                    "colorPrimaryHover": "rgb(255, 199, 0)",
+                                    "controlOutline": "rgba(253, 240, 0, 0.4)",
+                                },
+                                Button: {
+                                    defaultActiveBorderColor: '#FDF000',
+                                    colorPrimary: '#FDF000',
+                                    colorPrimaryHover: "rgb(255, 199, 0)",
+                                    colorPrimaryActive: "rgb(255, 199, 0)",
+                                    controlOutline: "FDF000",
+                                }
+                            }
+
+                        }}
+                    >
+                        {children}
+                    </ConfigProvider>
+                </div>
             </div>
         </div>
     );
