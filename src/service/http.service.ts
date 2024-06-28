@@ -85,7 +85,7 @@ const HttpRequest = async<T>(method: HttpMethod, route: string, data?: Record<st
     const config = {
         method: method,
         maxBodyLength: Infinity,
-        url: `http://localhost:3000/${route}`,
+        url: `https://surti-solicitudes-back-production.up.railway.app/${route}`,
         headers,
         data: data,
     };
